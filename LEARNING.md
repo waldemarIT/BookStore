@@ -2,12 +2,15 @@
 
 ## Книга "Spring Start Here" (Laurentiu Spilca)
 
-| Частина | Розділи | Що дає для проекту |
+| Chapter | Тема | Що дає для проекту |
 |---|---|---|
-| Part 1 | 1–5 | ✅ Вже пройшов — Spring Context, Beans |
-| Part 3 | 13–15 | Spring Data JPA, репозиторії, запити — **читати першим** |
-| Part 4 | 10–12 | Spring MVC, REST, `@RestController` — зрозумієш Controller |
-| Part 2 | 6–7 | `@Transactional`, AOP — можна після Part 3 |
+| Ch 1–6 | Part 1 | ✅ Вже пройшов — Spring Context, Beans, AOP |
+| **Ch 10** | REST services | `@RestController`, `@RequestBody` — зрозумієш Controller |
+| **Ch 13** | Transactions | Як працює `@Transactional` в Service |
+| **Ch 14** | Spring Data | Entity, Repository, запити до БД — **читати першим** |
+| Ch 7–8 | Spring Boot + MVC | Корисний контекст перед Ch 10 |
+| Ch 12 | Data sources | Контекст перед Ch 14 |
+| Ch 6, 9, 11, 15 | AOP, Scopes, Feign, Tests | Можна пропустити або пізніше |
 
 ---
 
