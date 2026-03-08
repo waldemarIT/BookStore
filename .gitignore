@@ -1,0 +1,23 @@
+# Backend
+backend/bookstore/target/
+backend/bookstore/.mvn/
+*.class
+*.jar
+*.war
+*.log
+
+# Frontend
+frontend/bookstore-frontend/.next/
+frontend/bookstore-frontend/node_modules/
+frontend/bookstore-frontend/.env.local
+frontend/bookstore-frontend/out/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
