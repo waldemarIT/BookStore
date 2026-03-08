@@ -59,6 +59,29 @@ Part 2 книги (Transactional, AOP)
 
 ---
 
+## Як працює запит (flow)
+
+```
+HTTP Request (наприклад GET /api/books/5)
+       ↓
+BookController      ← отримує запит, викликає сервіс
+       ↓
+BookService         ← бізнес-логіка, валідація, транзакції
+       ↓
+BookRepository      ← запит до БД
+       ↓
+Book (Entity)       ← результат з БД
+       ↓
+BookMapper          ← конвертує Entity → Response
+       ↓
+BookResponse        ← відправляється клієнту (JSON)
+```
+
+**Правило:** кожен шар знає тільки про наступний.
+Controller не знає про БД. Repository не знає про HTTP.
+
+---
+
 ## Модулі для самостійного написання
 
 Патерн той самий що в `books/` — entity, repository, dto, mapper, service, controller.
