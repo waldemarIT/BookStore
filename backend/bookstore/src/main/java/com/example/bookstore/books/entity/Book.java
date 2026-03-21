@@ -55,13 +55,13 @@ public class Book {
     @Column(name = "cover_image_url")
     private String coverImageUrl;
 
+    @Column(name = "is_exclusive", nullable = false)
+    @Builder.Default
+    private Boolean isExclusive = false;
+
     // Зв'язок Many-to-Many через проміжну таблицю books_authors
     @ManyToMany
-    @JoinTable(
-            name = "books_authors",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id")
-    )
+    @JoinTable(name = "books_authors", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
     @Builder.Default
     private List<Author> authors = new ArrayList<>();
 

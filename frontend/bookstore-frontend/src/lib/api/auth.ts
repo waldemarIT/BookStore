@@ -1,5 +1,21 @@
 import { apiClient } from "./client";
-import type { AuthResponse } from "@/types";
+import type { AuthUser } from "@/lib/store/authStore";
+
+export interface AuthResponse {
+  token: string;
+  customer: AuthUser;
+}
+
+export interface LoyaltyDto {
+  currentPoints: number;
+  totalPoints: number;
+  tierLevel: "BRONZE" | "SILVER" | "GOLD" | "PLATINUM";
+}
+
+export interface ProfileResponse {
+  customer: AuthUser;
+  loyalty: LoyaltyDto | null;
+}
 
 export const authApi = {
   login: (email: string, password: string) =>
@@ -16,5 +32,5 @@ export const authApi = {
     apiClient.post<AuthResponse>("/api/auth/register", data).then((r) => r.data),
 
   me: () =>
-    apiClient.get<AuthResponse["customer"]>("/api/auth/me").then((r) => r.data),
+    apiClient.get<ProfileResponse>("/api/users/me").then((r) => r.data),
 };

@@ -1,26 +1,114 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─── Theme tokens ─────────────────────────────────────────────────────── */
+:root,
+[data-theme="dark"] {
+  --bg:          #0a0a0a;
+  --bg-2:        #111111;
+  --nav-bg:      rgba(10,10,10,0.85);
+  --card:        rgba(255,255,255,0.025);
+  --card-h:      rgba(255,255,255,0.045);
+  --border:      rgba(255,255,255,0.07);
+  --border-h:    rgba(255,255,255,0.15);
+  --text-1:      #ffffff;
+  --text-2:      #a1a1aa;
+  --text-3:      #71717a;
+  --text-4:      #52525b;
+  --grid-line:   rgba(255,255,255,0.03);
+  --invert-logo: 0;
 }
 
+[data-theme="light"] {
+  --bg:          #f2f2f3;
+  --bg-2:        #e8e8ea;
+  --nav-bg:      rgba(242,242,243,0.9);
+  --card:        rgba(255,255,255,0.75);
+  --card-h:      rgba(255,255,255,0.95);
+  --border:      rgba(0,0,0,0.09);
+  --border-h:    rgba(0,0,0,0.18);
+  --text-1:      #0f0f10;
+  --text-2:      #52525b;
+  --text-3:      #71717a;
+  --text-4:      #a1a1aa;
+  --grid-line:   rgba(0,0,0,0.04);
+  --invert-logo: 1;
+}
+
+/* ─── Tailwind @theme extension ────────────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base ─────────────────────────────────────────────────────────────── */
+body {
+  background: var(--bg);
+  color: var(--text-1);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─── Semantic utility classes ─────────────────────────────────────────── */
+.t-bg        { background: var(--bg); }
+.t-bg-2      { background: var(--bg-2); }
+.t-nav       { background: var(--nav-bg); }
+.t-card      { background: var(--card); border-color: var(--border); }
+.t-card-h:hover { background: var(--card-h); border-color: var(--border-h); }
+.t-text-1    { color: var(--text-1); }
+.t-text-2    { color: var(--text-2); }
+.t-text-3    { color: var(--text-3); }
+.t-text-4    { color: var(--text-4); }
+.t-border    { border-color: var(--border); }
+.t-border-h  { border-color: var(--border-h); }
+
+/* Hover card — works in Server Components (no JS handlers needed) */
+.t-card-hover {
+  background: var(--card);
+  border-color: var(--border);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.t-card-hover:hover {
+  background: var(--card-h);
+  border-color: var(--border-h);
+}
+
+/* ─── Grid background ──────────────────────────────────────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ─── Animations ───────────────────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.9; }
+}
+@keyframes draw {
+  from { stroke-dashoffset: 1000; }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float      { animation: float 6s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+.animate-draw       { stroke-dasharray: 1000; animation: draw 4s ease-in-out infinite alternate; }
+.animate-slide-down { animation: slide-down 0.35s ease-out; }
+
+/* ─── Light-mode overrides for components that use hardcoded dark values ── */
+[data-theme="light"] .curved-bg {
+  opacity: 0.06;
+}
+
+[data-theme="light"] .light-invert-border {
+  border-color: rgba(0,0,0,0.08) !important;
+  background: rgba(0,0,0,0.02) !important;
 }
